@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#07100d">
+  <meta name="description" content="Aurelith AI — your personal voice-first AI command center.">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg" type="image/svg+xml">
+  <title>Aurelith AI</title>
+  <style>
+    :root{color-scheme:dark;--bg:#07100d;--panel:#0d1914;--line:#1f3c2e;--green:#8cf0bd;--muted:#9ab5a6;--text:#effaf3}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 28%,#123526 0%,#09140f 38%,#050907 78%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100svh}
+    button,input{font:inherit}button{cursor:pointer}.app{min-height:100svh;max-width:680px;margin:auto;padding:calc(env(safe-area-inset-top) + 20px) 20px calc(env(safe-area-inset-bottom) + 18px);display:flex;flex-direction:column}
+    header{display:flex;justify-content:space-between;align-items:center}.brand{font-size:12px;letter-spacing:.24em;color:var(--green);font-weight:800}.status{font-size:12px;color:var(--muted);border:1px solid var(--line);padding:7px 10px;border-radius:99px}
+    main{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px 0 22px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--muted);text-transform:uppercase}h1{font-size:clamp(30px,8vw,42px);letter-spacing:-.04em;margin:12px 0 8px}.subtitle{color:var(--muted);line-height:1.6;max-width:300px;margin:0 auto 30px}
+    .core{width:190px;height:190px;border-radius:50%;display:grid;place-items:center;position:relative;margin:10px auto 24px;background:radial-gradient(circle,#1a6847 0%,#0c3021 42%,#08140e 68%);border:1px solid #3d9b6c;box-shadow:0 0 65px #1eaa6640,inset 0 0 34px #54d99422}
+    .core:before,.core:after{content:"";position:absolute;inset:-13px;border:1px solid #4acb8a70;border-radius:50%;animation:pulse 3s ease-out infinite}.core:after{inset:-27px;animation-delay:1.5s}.core svg{width:78px;height:78px;color:#b6fbd5;filter:drop-shadow(0 0 12px #70e7a8)}
+    @keyframes pulse{0%{transform:scale(.92);opacity:.75}100%{transform:scale(1.12);opacity:0}}
+    .reply{width:100%;text-align:left;background:#0d1914cc;border:1px solid var(--line);border-radius:20px;padding:17px;line-height:1.55;color:#dcefe4;min-height:60px;margin-bottom:18px}
+    .composer{display:flex;gap:9px;width:100%}.composer input{flex:1;min-width:0;background:#0e1a14;border:1px solid #294735;border-radius:99px;padding:15px 17px;color:var(--text);outline:none}.composer input:focus{border-color:var(--green)}
+    .round{width:52px;height:52px;flex:0 0 52px;border:0;border-radius:50%;background:linear-gradient(145deg,#a4f5c8,#37a875);color:#052014;display:grid;place-items:center}.round svg{width:23px;height:23px}
+    .actions{display:flex;gap:9px;width:100%;margin-top:12px}.secondary{flex:1;background:#0b1510;border:1px solid var(--line);color:var(--muted);padding:12px 8px;border-radius:14px;font-size:13px}
+    nav{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;border-top:1px solid #244131;padding-top:14px;margin-top:18px}nav button{background:transparent;border:0;color:#8fa99a;padding:7px 2px;font-size:11px;display:flex;flex-direction:column;align-items:center;gap:7px}nav button.active{color:var(--green)}nav svg{width:20px;height:20px}
+    .note{font-size:11px;color:#6f8b7b;margin-top:14px;line-height:1.5}.toast{color:var(--green);font-size:12px;min-height:18px;margin-top:10px}
+    @media(min-width:600px){.app{padding-top:32px}.core{width:210px;height:210px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+<div class="app">
+  <header><div><div class="brand">AURELITH AI</div><div style="font-size:12px;color:var(--muted);margin-top:5px">PERSONAL INTELLIGENCE</div></div><div class="status" id="status">● Interface ready</div></header>
+  <main>
+    <div class="eyebrow" id="greeting">YOUR COMMAND CENTER</div>
+    <h1 id="headline">Good to see you.</h1>
+    <p class="subtitle">Your personal AI command center. Speak naturally, or type a message to begin.</p>
+    <div class="core" aria-label="Aurelith AI animated core">
+      <svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M8 33h7l5-13 8 26 8-34 8 29 5-8h7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="32" cy="32" r="28" stroke="currentColor" stroke-opacity=".35"/></svg>
+    </div>
+    <div class="reply" id="reply" role="status">Hello. I’m Aurelith. The interface is ready; connect a secure AI backend to enable intelligent replies.</div>
+    <form class="composer" id="chatForm"><input id="message" autocomplete="off" placeholder="Ask me anything…" aria-label="Your message"><button class="round" type="submit" aria-label="Send message"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12 20 4l-5 16-3-7-8-1Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m12 13 8-9" stroke="currentColor" stroke-width="2"/></svg></button></form>
+    <div class="actions"><button class="secondary" id="voiceBtn">🎙 Speak to me</button><button class="secondary" id="speakBtn">🔊 Read greeting</button></div>
+    <div class="toast" id="toast" aria-live="polite"></div>
+    <p class="note">Prototype mode · No API keys are stored in this page.<br>AI replies require a separately deployed secure backend.</p>
+  </main>
+  <nav aria-label="Main navigation">
+    <button class="active" data-tab="Home"><svg viewBox="0 0 24 24" fill="none"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1V10Z" stroke="currentColor" stroke-width="1.7"/></svg>Home</button>
+    <button data-tab="Chats"><svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v12H9l-5 4V5Z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>Chats</button>
+    <button data-tab="Tools"><svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="4" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="4" y="14" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.7"/><rect x="14" y="14" width="6" height="6" rx="1" stroke="currentColor" stroke-width="1.7"/></svg>Tools</button>
+    <button data-tab="Settings"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M4 21c0-4 3-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.7"/></svg>Profile</button>
+  </nav>
+</div>
+<script>
+const $=id=>document.getElementById(id), reply=$('reply'), toast=$('toast');
+$('chatForm').addEventListener('submit',e=>{e.preventDefault();const value=$('message').value.trim();if(!value)return;reply.textContent='Your message: “'+value+'” — the secure AI backend is not connected yet. This starter does not pretend to generate an AI answer.';$('message').value='';toast.textContent='Prototype: backend connection needed for AI responses.';});
+function say(text){if(!('speechSynthesis'in window)){toast.textContent='Speech synthesis is not available in this browser.';return;}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.lang='en-GB';const voices=speechSynthesis.getVoices();const british=voices.find(v=>/^en-GB$/i.test(v.lang)&&/female|serena|kate|susan|libby|sonia/i.test(v.name))||voices.find(v=>/^en-GB$/i.test(v.lang));if(british)u.voice=british;u.rate=.94;speechSynthesis.speak(u);}
+$('speakBtn').addEventListener('click',()=>say("Good evening. I'm Aurelith, your personal AI assistant. How may I help you today?"));
+$('voiceBtn').addEventListener('click',()=>{const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){toast.textContent='Speech recognition is not available here. You can still type your message.';return;}const r=new SR();r.lang='en-GB';r.interimResults=false;r.onstart=()=>{toast.textContent='Listening…';$('status').textContent='● Listening';};r.onresult=e=>{$('message').value=e.results[0][0].transcript;toast.textContent='Speech captured. Tap send to submit.';};r.onerror=()=>{toast.textContent='Microphone unavailable or permission denied. Try typing instead.';};r.onend=()=>{$('status').textContent='● Interface ready';};try{r.start();}catch(e){toast.textContent='Could not start microphone. Try again.';}});
+document.querySelectorAll('nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));b.classList.add('active');const tab=b.dataset.tab;if(tab==='Home'){$('headline').textContent='Good to see you.';reply.textContent='Hello. I’m Aurelith. The interface is ready; connect a secure AI backend to enable intelligent replies.';}else{$('headline').textContent=tab;reply.textContent=tab==='Chats'?'Your conversations will appear here after secure chat storage is connected.':tab==='Tools'?'Web research, document analysis and assistant tools will be added after the secure backend is deployed.':'Voice preferences, privacy controls and account security will be configured in a later step.';}}));
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
